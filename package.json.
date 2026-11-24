@@ -1,0 +1,22 @@
+
+{
+  "name": "sitani-the-hacker-death-bot",
+  "version": "3.5.5",
+  "description": "SITANI THE HACKER DEATH WhatsApp Bot",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "latest",
+    "axios": "latest",
+    "dotenv": "latest",
+    "pino": "latest",
+    "qrcode-terminal": "latest"
+  }
+}
