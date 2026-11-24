@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090014">
+  <title>SITANI HACKER DEATH | Live Session</title>
+  <style>
+    :root { color-scheme: dark; --bg:#090014; --panel:#140923; --line:#43205f; --purple:#a855f7; --pink:#ff36b7; --muted:#b9a8ca; }
+    * { box-sizing:border-box }
+    body { margin:0; min-height:100vh; font-family:Inter,system-ui,Segoe UI,Arial,sans-serif; color:#fff; background:radial-gradient(ellipse at 15% 5%,#35105b 0,transparent 38%),radial-gradient(ellipse at 90% 30%,#4a0d42 0,transparent 32%),var(--bg); }
+    .wrap { width:min(940px,92%); margin:auto; padding:34px 0 26px; }
+    header { text-align:center; padding:20px 10px 30px; }
+    .sigil { width:66px;height:66px;margin:0 auto 15px;display:grid;place-items:center;border:1px solid #a855f7;border-radius:20px;background:#1c0b2b;box-shadow:0 0 28px #a855f755;font-size:32px; }
+    .eyebrow { color:#d8b4fe; letter-spacing:.22em; font-size:11px; font-weight:800; }
+    h1 { margin:10px 0 8px; font-size:clamp(27px,6vw,48px); line-height:1.05; letter-spacing:.025em; text-shadow:0 0 24px #a855f788; }
+    h1 span { color:#f472d0; }
+    .sub { color:var(--muted); margin:0; }
+    .version { display:inline-block; margin-top:17px; padding:7px 13px; border:1px solid #7e22ce; border-radius:99px; color:#e9d5ff; font-size:12px; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:17px; }
+    .card { background:linear-gradient(145deg,#1b0d2b,#10071b); border:1px solid var(--line); border-radius:20px; padding:23px; box-shadow:0 15px 45px #0005; }
+    .card h2 { margin:0 0 8px; font-size:20px; }
+    .card p { color:var(--muted); line-height:1.55; font-size:14px; margin:0 0 18px; }
+    .icon { font-size:27px; margin-bottom:10px; }
+    label { display:block; color:#e9d5ff; font-size:13px; margin:12px 0 7px; }
+    input { width:100%; padding:13px 14px; border-radius:11px; border:1px solid #583276; background:#0b0412; color:#fff; outline:none; font-size:15px; }
+    input:focus { border-color:#c084fc; box-shadow:0 0 0 3px #a855f733; }
+    button { width:100%; border:0; border-radius:11px; padding:13px 16px; margin-top:13px; background:linear-gradient(100deg,#7e22ce,#db2777); color:white; font-weight:800; font-size:14px; cursor:pointer; }
+    button:disabled { opacity:.55; cursor:wait; }
+    .secondary { background:#251236; border:1px solid #643a82; }
+    .result { display:none; margin-top:15px; padding:14px; border-radius:12px; background:#0a0610; border:1px solid #512b70; overflow-wrap:anywhere; }
+    .result.show { display:block; }
+    .result img { display:block; width:min(240px,100%); aspect-ratio:1; object-fit:contain; background:white; border-radius:10px; margin:10px auto; }
+    .code { font-size:25px; font-weight:900; letter-spacing:.16em; text-align:center; color:#f0abfc; padding:10px 0; }
+    .status { margin-top:18px; text-align:center; color:#c4b5fd; font-size:13px; min-height:20px; }
+    .notice { margin-top:18px; padding:15px 17px; border:1px solid #5b3b22; border-radius:14px; background:#1c120b; color:#f5d7ad; font-size:13px; line-height:1.55; }
+    footer { text-align:center; padding:28px 8px 8px; color:#a994bd; font-size:12px; line-height:1.8; }
+    footer strong { color:#e9d5ff; letter-spacing:.12em; }
+    @media(max-width:680px){ .grid{grid-template-columns:1fr}.wrap{padding-top:18px}.card{padding:20px} }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="sigil">☠️</div>
+      <div class="eyebrow">POWERED BY SITANI TECH</div>
+      <h1>SITANI <span>HACKER DEATH</span></h1>
+      <p class="sub">NEXT-GEN WHATSAPP BOT · LIVE SESSION PORTAL</p>
+      <div class="version">VERSION 3.5.5</div>
+    </header>
+
+    <section class="grid" aria-label="WhatsApp connection methods">
+      <article class="card">
+        <div class="icon">▦</div>
+        <h2>QR CODE SCAN</h2>
+        <p>Request a fresh QR code, then scan it from WhatsApp → Linked Devices → Link a Device.</p>
+        <button id="qrBtn" type="button">GENERATE QR CODE</button>
+        <div id="qrResult" class="result" aria-live="polite"></div>
+      </article>
+
+      <article class="card">
+        <div class="icon">⌁</div>
+        <h2>PAIRING CODE</h2>
+        <p>Enter the phone number for the WhatsApp account you own, including its country code.</p>
+        <label for="phone">WhatsApp number</label>
+        <input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Example: 2567XXXXXXXX">
+        <button id="pairBtn" type="button">GET PAIRING CODE</button>
+        <div id="pairResult" class="result" aria-live="polite"></div>
+      </article>
+    </section>
+
+    <div id="status" class="status" role="status">Connection service is waiting.</div>
+    <div class="notice"><strong>Security notice:</strong> Only link a WhatsApp account you own or are authorized to manage. Never share your QR code or pairing code. Do not publish session files, credentials, or API secrets in this repository.</div>
+
+    <footer>
+      <strong>☠ SITANI HACKER DEATH BOT</strong><br>
+      VERSION 3.5.5 · POWERED BY SITANI TECH<br>
+      Built with passion ⚡
+    </footer>
+  </main>
+
+  <script>
+    /*
+      FRONTEND / BACKEND CONTRACT
+      Add these routes to your bot server:
+        GET  /api/qr       -> { "qr": "data:image/png;base64,..." } OR { "qr": "<data URL>" }
+        POST /api/pair     -> body { "phone": "2567..." }, response { "code": "ABCD-EFGH" }
+      Keep authentication/session data on the server. Never send it to this page.
+      If your bot runs on another origin, configure CORS and set API_BASE below.
+    */
+    const API_BASE = ""; // Same-origin VPS deployment. Example: "https://your-domain.example"
+    const statusEl = document.getElementById("status");
+    const qrResult = document.getElementById("qrResult");
+    const pairResult = document.getElementById("pairResult");
+    const qrBtn = document.getElementById("qrBtn");
+    const pairBtn = document.getElementById("pairBtn");
+
+    function setStatus(message) { statusEl.textContent = message; }
+    async function readJson(response) {
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || `Request failed (${response.status})`);
+      return data;
+    }
+
+    qrBtn.addEventListener("click", async () => {
+      qrBtn.disabled = true;
+      qrResult.className = "result show";
+      qrResult.textContent = "Requesting QR code from your bot server…";
+      setStatus("Contacting connection service…");
+      try {
+        const data = await readJson(await fetch(`${API_BASE}/api/qr`, { headers: { "Accept": "application/json" } }));
+        if (!data.qr) throw new Error("The server did not return a QR image.");
+        qrResult.innerHTML = "";
+        const img = document.createElement("img");
+        img.alt = "WhatsApp linking QR code";
+        img.src = data.qr;
+        qrResult.appendChild(img);
+        const note = document.createElement("p");
+        note.textContent = "Open WhatsApp → Linked Devices → Link a Device, then scan this code.";
+        qrResult.appendChild(note);
+        setStatus("QR code received. Scan it promptly; codes expire.");
+      } catch (error) {
+        qrResult.textContent = `Could not get a QR code: ${error.message}. Make sure your bot backend implements GET /api/qr.`;
+        setStatus("Connection service is not configured yet.");
+      } finally { qrBtn.disabled = false; }
+    });
+
+    pairBtn.addEventListener("click", async () => {
+      const phone = document.getElementById("phone").value.replace(/[^\d]/g, "");
+      if (phone.length < 8 || phone.length > 15) {
+        pairResult.className = "result show";
+        pairResult.textContent = "Enter a valid phone number with country code, digits only.";
+        return;
+      }
+      pairBtn.disabled = true;
+      pairResult.className = "result show";
+      pairResult.textContent = "Requesting pairing code…";
+      setStatus("Contacting connection service…");
+      try {
+        const data = await readJson(await fetch(`${API_BASE}/api/pair`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({ phone })
+        }));
+        if (!data.code) throw new Error("The server did not return a pairing code.");
+        pairResult.innerHTML = "";
+        const code = document.createElement("div");
+        code.className = "code";
+        code.textContent = data.code;
+        pairResult.appendChild(code);
+        const note = document.createElement("p");
+        note.textContent = "On your phone: WhatsApp → Linked Devices → Link with phone number instead. Enter this code.";
+        pairResult.appendChild(note);
+        setStatus("Pairing code received. Keep it private.");
+      } catch (error) {
+        pairResult.textContent = `Could not get a pairing code: ${error.message}. Make sure your bot backend implements POST /api/pair.`;
+        setStatus("Connection service is not configured yet.");
+      } finally { pairBtn.disabled = false; }
+    });
+  </script>
+</body>
+</html>
